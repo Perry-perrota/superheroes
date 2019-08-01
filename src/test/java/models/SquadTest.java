@@ -1,10 +1,16 @@
 package models;
 
+import org.junit.After;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class SquadTest {
+
+    @After
+    public void tearDown() {
+        Squad.clearAllSquads();
+    }
 
     @Test
     public void squadInstantiatesCorrecctly(){
@@ -33,5 +39,29 @@ public class SquadTest {
     public Squad setupSquad(){
         Squad squad=new Squad(5,"avengers","peace");
         return squad;
+    }
+
+    @Test
+    public void getAllSquads()throws Exception {
+        Squad squad=setupSquad();
+        Squad otherSquad=setupSquad();
+        assertEquals(2,Squad.getAllSquads().size());
+
+    }
+
+    @Test
+    public void getAllSquads_containsAllSquads()throws Exception {
+        Squad squad=setupSquad();
+        Squad otherSquad=setupSquad();
+        assertTrue(Squad.getAllSquads().contains(squad));
+        assertTrue(Squad.getAllSquads().contains(otherSquad));
+    }
+
+    @Test
+    public void clearAllSquads_deletesAllSquadInstances()throws Exception{
+        Squad squad=setupSquad();
+        Squad otherSquad=setupSquad();
+        Squad.clearAllSquads();
+        assertTrue(Squad.getAllSquads().isEmpty());
     }
 }
