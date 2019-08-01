@@ -8,9 +8,15 @@ public class
 App {
     public static void main(String[] args) {
         staticFileLocation("/public");
+
+        get("/",(request,response)->{
+            HashMap<String,Object>model=new HashMap<>();
+            return new ModelAndView(model,"index.hbs");
+        },new HandlebarsTemplateEngine());
+
         get("/heroes", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            ArrayList<Hero> heroes = Hero.getAll();
+            ArrayList<Hero> heroes = Hero.getAllHeroes();
             model.put("heroes", heroes);
             return new ModelAndView(model, "heroes.hbs");
         }, new HandlebarsTemplateEngine());
@@ -42,8 +48,12 @@ App {
             request.session().attribute("squadName",squadName);
             String cause = request.queryParams("cause");
             int squadSize = Integer.parseInt(request.queryParams("squadSize"));
-            Squad squad = new Squad(squadName, cause, squadSize);
+            Squad squad = new Squad(squadSize, squadName,cause);
             Map<String, Object> model = new HashMap<>();
             model.put("squad", squad);
             return new ModelAndView(model, "newSquad.hbs");
         }, new HandlebarsTemplateEngine());
+
+
+    }
+}

@@ -1,0 +1,19 @@
+h1{
+font-family: 'Courgette' , cursive;
+color:cyan;
+}
+h5{
+font-family: 'Courgette' , cursive;
+color:crimson;
+}
+ul{
+list-style-type:none;
+margin:0;
+padding:0px;
+}
+li{
+margin:10px;
+}
+.navbar{
+margin-bottom:0px;
+}
