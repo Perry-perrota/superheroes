@@ -64,4 +64,10 @@ public class SquadTest {
         Squad.clearAllSquads();
         assertTrue(Squad.getAllSquads().isEmpty());
     }
+
+    @Test
+    public void getSquadId_squadInstantiatesWithCorrectID() throws Exception{
+        Squad squad=setupSquad();
+        assertEquals(1,squad.getSquadId());
+    }
 }
