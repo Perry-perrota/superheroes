@@ -70,4 +70,10 @@ public class HeroTest {
         Hero hero=new Hero("superman","flight","moon",10);
         return hero;
     }
+
+    @Test
+    public void getHeroID_heroInstantiatesWithId_true() {
+        Hero hero=setupHero();
+        assertEquals(1,hero.getHeroID());
+    }
 }
