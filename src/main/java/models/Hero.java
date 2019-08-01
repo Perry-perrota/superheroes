@@ -44,5 +44,8 @@ public class Hero {
     public static void clearAllHeroes(){
         instances.clear();
     }
+    public static Hero findHeroById(int id){
+       return instances.get(id-1);
+    }
 
 }

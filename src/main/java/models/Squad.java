@@ -39,4 +39,7 @@ public class Squad {
     public static void clearAllSquads(){
         squadInstances.clear();
     }
+    public static Squad findSquadById(int id){
+        return squadInstances.get(id-1);
+    }
 }
