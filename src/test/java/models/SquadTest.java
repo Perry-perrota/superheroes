@@ -71,9 +71,18 @@ public class SquadTest {
         assertEquals(1,squad.getSquadId());
     }
     @Test
-    public void findHeroById_returnsCorrectPostIfMreThan1Exists()throws Exception{
+    public void findSquadById_returnsCorrectHeroIfMreThan1Exists()throws Exception{
         Squad squad=setupSquad();
         Squad otherSquad=setupSquad();
         assertEquals(2,Squad.findSquadById(otherSquad.getSquadId()).getSquadId());
+    }
+    @Test
+    public void deleteSquad_deletesSpecificSquad_true(){
+        Squad squad=setupSquad();
+       Squad otherSquad=setupSquad();
+        squad.deleteSquad();
+        assertEquals(1,Squad.getAllSquads().size());
+        assertEquals(Squad.getAllSquads().get(0).getSquadId(),2);
+
     }
 }
