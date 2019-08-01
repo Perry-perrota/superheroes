@@ -70,4 +70,10 @@ public class SquadTest {
         Squad squad=setupSquad();
         assertEquals(1,squad.getSquadId());
     }
+    @Test
+    public void findHeroById_returnsCorrectPostIfMreThan1Exists()throws Exception{
+        Squad squad=setupSquad();
+        Squad otherSquad=setupSquad();
+        assertEquals(2,Squad.findSquadById(otherSquad.getSquadId()).getSquadId());
+    }
 }
