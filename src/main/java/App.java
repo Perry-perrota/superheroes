@@ -54,6 +54,23 @@ App {
             return new ModelAndView(model, "newSquad.hbs");
         }, new HandlebarsTemplateEngine());
 
+        get("/heroes/:heroID/delete",(req,res)->{
+            Map<String,Object>model=new HashMap<>();
+            int idOfHeroToDelete=Integer.parseInt(req.params(":heroID"));
+            Hero deleteHero=Hero.findHeroById(idOfHeroToDelete);
+            deleteHero.deleteHero();
+            return new ModelAndView(model,"newHero.hbs");
+        },new HandlebarsTemplateEngine());
+
+        get("/squads/:squadId/delete",(req,res)->{
+            Map<String,Object>model=new HashMap<>();
+            int idOfSquadToDelete=Integer.parseInt(req.params(":squadId"));
+            Squad deleteSquad=Squad.findSquadById(idOfSquadToDelete);
+            deleteSquad.deleteSquad();
+            return new ModelAndView(model,"newSquad.hbs");
+        },new HandlebarsTemplateEngine());
+
+
 
     }
 }
