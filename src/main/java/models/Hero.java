@@ -39,7 +39,7 @@ public class Hero {
         return age;
     }
     public static ArrayList<Hero> getAllHeroes(){
-        return null;
+        return instances;
     }
     public static void clearAllHeroes(){
         instances.clear();
