@@ -9,6 +9,7 @@ public class Squad {
     private String cause;
     private static ArrayList<Squad> squadInstances=new ArrayList<>();
 
+
     public Squad(int squadSize, String squadName, String cause) {
         this.squadSize = squadSize;
         this.squadName = squadName;
@@ -41,5 +42,8 @@ public class Squad {
     }
     public static Squad findSquadById(int id){
         return squadInstances.get(id-1);
+    }
+    public void deleteSquad(){
+        squadInstances.remove(squadId-1);
     }
 }
