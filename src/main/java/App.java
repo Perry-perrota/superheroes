@@ -6,11 +6,19 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 
 public class
 App {
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+    }
     public static void main(String[] args) {
         staticFileLocation("/public");
 
         get("/", (request, response) -> {
             HashMap<String, Object> model = new HashMap<>();
+
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -22,6 +30,7 @@ App {
             ArrayList<Squad> squads = Squad.getAllSquads();
             model.put("squads", squads);
 
+            request.session().attribute("squadId");
             return new ModelAndView(model, "heroes.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -83,10 +92,25 @@ App {
             squad.addHero(hero);
 
             Map<String,Object> model=new HashMap<>();
-            model.put("fullsquad",squad);
+            model.put("fullSquad",squad);
+
+            request.session().attribute("squadId",idOfSquadToAddTo);
+
+            model.put("squadId",idOfSquadToAddTo);
 
             return new ModelAndView(model,"addToSquad.hbs");
         },new HandlebarsTemplateEngine());
 
+        get("/allsquads",(request, response) -> {
+            ArrayList<Hero>heroesInSquad=Squad.getSquadHeroes();
+            ArrayList<Squad>squadArrayList=Squad.getAllSquads();
+
+            Map<String,Object>model=new HashMap<>();
+            model.put("heroesInSquad",heroesInSquad);
+            model.put("squadArrayList",squadArrayList);
+            return new ModelAndView(model,"allsquads.hbs");
+        },new HandlebarsTemplateEngine());
+
     }
+
 }
