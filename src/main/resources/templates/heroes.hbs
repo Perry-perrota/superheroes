@@ -33,12 +33,23 @@
                 <div class="card">
                     <img class="card-img-top" src="/images/download.png" alt="Hero Image">
                     <div class="card-body">
-                        <h5 class="card-title">Hero Name is: {{name}}</h5>
+                        <h5 class="card-title">Hero Name is: {{heroName}}</h5>
                         <p class="card-text">Strength: {{strength}}</p>
                         <p class="card-text">Weakness: {{weakness}}</p>
                         <p class="card-text">Age: {{age}}</p>
-                        <a class="btn btn-primary" href="/squads/add/hero" name="heroId" value="{{id}}">Add to Squad</a>
-                        <a class="btn btn-primary" href="/allSquads" >View Squads</a>
+                        <label for="squad">Select your squad</label>
+                        <a class="btn btn-danger" href="/heroes/{{heroID}}/delete" >Delete Hero</a>
+
+                        <form action="/squad/{{squadId}}/hero/{{heroID}}" method="post">
+
+                            <input class="form-control" type="text" name="heroID" placeholder="Hero ID:{{heroID}}" value="{{heroID}}" readonly>
+                            <select class="form-control select2 mt15 mb0" name="squadId" data-placeholder="Assign to Squad">
+                                {{#each squads}}
+                                <option value="{{squadId}}">{{squadName}}</option>
+                                {{/each}}
+                            </select>
+                            <br><button type="submit" class="btn btn-sm btn-success">Add to Squad</button>
+
                         </form>
 
                     </div>
